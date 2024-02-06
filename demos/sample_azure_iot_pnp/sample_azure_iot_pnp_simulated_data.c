@@ -55,12 +55,23 @@
  * @brief Telemetry values
  */
 #define sampleazureiotTELEMETRY_NAME                      "temperature"
+#define sampleazureiotTELEMETRY_NAME_HUMID                "humidity"
+#define sampleazureiotTELEMETRY_NAME_ACCEL_X              "accelx"
+#define sampleazureiotTELEMETRY_NAME_ACCEL_Y              "accely"
+#define sampleazureiotTELEMETRY_NAME_ACCEL_Z              "accelz"
 
 /**
  *@brief The Telemetry message published in this example.
  */
-#define sampleazureiotMESSAGE                             "{\"" sampleazureiotTELEMETRY_NAME "\":%0.2f}"
-
+#if 1
+#define sampleazureiotMESSAGE   "{\"" sampleazureiotTELEMETRY_NAME "\":%0.2f, \"" \
+                                      sampleazureiotTELEMETRY_NAME_HUMID "\":%0.2f, \"" \
+                                      sampleazureiotTELEMETRY_NAME_ACCEL_X "\":%0.2f, \"" \
+                                      sampleazureiotTELEMETRY_NAME_ACCEL_Y "\":%0.2f, \"" \
+                                      sampleazureiotTELEMETRY_NAME_ACCEL_Z "\":%0.2f}"
+#else
+#define sampleazureiotMESSAGE   "{\"" sampleazureiotTELEMETRY_NAME "\":%0.2f}"
+#endif
 
 /* Device values */
 static double xDeviceCurrentTemperature = sampleazureiotDEFAULT_START_TEMP_CELSIUS;
@@ -472,8 +483,11 @@ uint32_t ulCreateTelemetry( uint8_t * pucTelemetryData,
                             uint32_t ulTelemetryDataSize,
                             uint32_t * ulTelemetryDataLength )
 {
+	static double h, x, y, z = 0;
+	h += 10; x += 1.1; y += 1.5; z += 2.5;
+	if (h>100){h=0;} if (x>100){x=0;} if (y>100){y=0;} if (z>100){z=0;}
     int result = snprintf( ( char * ) pucTelemetryData, ulTelemetryDataSize,
-                           sampleazureiotMESSAGE, xDeviceCurrentTemperature );
+                           sampleazureiotMESSAGE, xDeviceCurrentTemperature, h, x, y, z );
 
     if( ( result >= 0 ) && ( result < ulTelemetryDataSize ) )
     {

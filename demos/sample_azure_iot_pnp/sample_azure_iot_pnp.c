@@ -91,12 +91,12 @@
  * @brief Time in ticks to wait between each cycle of the demo implemented
  * by prvMQTTDemoTask().
  */
-#define sampleazureiotDELAY_BETWEEN_DEMO_ITERATIONS_TICKS     ( pdMS_TO_TICKS( 5000U ) )
+#define sampleazureiotDELAY_BETWEEN_DEMO_ITERATIONS_TICKS     ( pdMS_TO_TICKS( 10U ) )
 
 /**
  * @brief Timeout for MQTT_ProcessLoop in milliseconds.
  */
-#define sampleazureiotPROCESS_LOOP_TIMEOUT_MS                 ( 500U )
+#define sampleazureiotPROCESS_LOOP_TIMEOUT_MS                 ( 5U )
 
 /**
  * @brief Delay (in ticks) between consecutive cycles of MQTT publish operations in a
@@ -105,7 +105,7 @@
  * Note that the process loop also has a timeout, so the total time between
  * publishes is the sum of the two delays.
  */
-#define sampleazureiotDELAY_BETWEEN_PUBLISHES_TICKS           ( pdMS_TO_TICKS( 2000U ) )
+#define sampleazureiotDELAY_BETWEEN_PUBLISHES_TICKS           ( pdMS_TO_TICKS( 5U ) )
 
 /**
  * @brief Transport timeout in milliseconds for transport send and receive.
@@ -361,7 +361,7 @@ static void prvAzureDemoTask( void * pvParameters )
                                            &pulIothubHostnameLength, &pucIotHubDeviceId,
                                            &pulIothubDeviceIdLength ) ) != 0 )
         {
-            LogError( ( "Failed on sample_dps_entry!: error code = 0x%08x\r\n", ( uint16_t ) ulStatus ) );
+            LogError( ( "Failed on sample_dps_entry!: error code = 0x%08x\r\n", ulStatus ) );
             return;
         }
     #endif /* democonfigENABLE_DPS_SAMPLE */
@@ -454,7 +454,7 @@ static void prvAzureDemoTask( void * pvParameters )
                                                                NULL, eAzureIoTHubMessageQoS1, NULL );
                     configASSERT( xResult == eAzureIoTSuccess );
                 }
-
+                LogInfo( ( "### ucScratchBuffer: %s\r\n", ucScratchBuffer ) );
                 /* Hook for sending update to reported properties */
                 ulReportedPropertiesUpdateLength = ulCreateReportedPropertiesUpdate( ucReportedPropertiesUpdate, sizeof( ucReportedPropertiesUpdate ) );
 

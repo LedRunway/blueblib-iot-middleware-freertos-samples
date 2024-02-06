@@ -58,7 +58,7 @@ extern void vLoggingPrintf( const char * pcFormatString,
  * @note To disable Device Provisioning undef this macro
  *
  */
-#define democonfigENABLE_DPS_SAMPLE
+// #define democonfigENABLE_DPS_SAMPLE
 
 #ifdef democonfigENABLE_DPS_SAMPLE
 
@@ -93,7 +93,7 @@ extern void vLoggingPrintf( const char * pcFormatString,
  * @brief IoTHub device Id.
  *
  */
-#define democonfigDEVICE_ID               "<YOUR DEVICE ID HERE>"
+#define democonfigDEVICE_ID               "freertos-virt-linux"
 
 /**
  * @brief IoTHub module Id.
@@ -106,13 +106,13 @@ extern void vLoggingPrintf( const char * pcFormatString,
  * @brief IoTHub hostname.
  *
  */
-#define democonfigHOSTNAME                "<YOUR IOT HUB HOSTNAME HERE>"
+#define democonfigHOSTNAME                "iot-hub-nord.azure-devices.net"
 
 /**
  * @brief Device symmetric key
  *
  */
-#define democonfigDEVICE_SYMMETRIC_KEY    "<Symmetric key>"
+#define democonfigDEVICE_SYMMETRIC_KEY    "lJqYE3c+Ah/cYol7V1eT8gv5tB2USRK1dAIoTKGGVEM="
 
 /**
  * @brief Client's X509 Certificate.
